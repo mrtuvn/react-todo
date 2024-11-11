@@ -3,10 +3,11 @@ import React, { useEffect } from "react";
 const TodoForm = ({ addItemTodo }) => {
   const [description, setDescription] = React.useState("");
   const [severity, setSeverity] = React.useState("");
+  console.log("run into TodoForm component");
 
   useEffect(() => {
-    console.log("render TodoForm component");
-  }, [description, severity]);
+    console.log("render TodoForm component"); /** only run once */
+  }, []);
 
   return (
     <div>
@@ -15,6 +16,7 @@ const TodoForm = ({ addItemTodo }) => {
         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
         id="descriptionField"
         name="descriptionField"
+        placeholder="Describe your thoughts"
         value={description}
         onChange={(e) => setDescription(e.target.value)}
       />

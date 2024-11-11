@@ -35,11 +35,27 @@ function App() {
   };
 
   const closeItem = (closeId) => {
-    setTodos((prevState) =>
-      prevState.map((todo) =>
-        todo.closeId === todo.id ? { ...todo, isClose: true } : todo
-      )
+    console.log(closeId);
+    const newTodos = [...todos];
+    newTodos.map((todo) =>
+      todo.id === closeId ? { ...todo, isClose: !!todo.isClose } : todo
     );
+    console.log("new after run", newTodos);
+    setTodos(newTodos);
+
+    // way2
+    // setTodos((prevState) =>
+    //   prevState.map((todo) =>
+    //     todo.id === closeId ? { ...todo, isClose: true } : todo
+    //   ));
+
+    // way3
+    // setTodos((prevState) => {
+    //   return prevState;
+    //   // prevState.map((todo) =>
+    //   //   todo.id === closeId ? { ...todo, isClose: true } : todo
+    //   // )
+    // });
   };
 
   const deleteTodo = (deleteId) => {

@@ -15,7 +15,7 @@ const TodoItem = ({ todo, deleteTodo, closeItem }) => {
       <div className="itemBody flex flex-col flex-wrap">
         <div className="itemContent">
           <p className="text-description ">{todo && todo.description}</p>
-          <p className="prority item-status">{todo && todo.severity}</p>
+          <p className="prority item-status grow-0">{todo && todo.severity}</p>
         </div>
         <div className="actions ml-auto">
           <button
