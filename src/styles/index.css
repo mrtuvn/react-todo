@@ -4,7 +4,7 @@
 
 @layer components {
   .btn {
-    @apply py-1 px-3 bg-blue-600 text-white font-semibold rounded-full shadow-md hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-400 focus:ring-opacity-75;
+    @apply py-1 px-2 bg-blue-600 text-white font-semibold rounded-full shadow-md hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-400 focus:ring-opacity-75;
   }
 
   .btn-add {
@@ -35,7 +35,11 @@
 }
 
 @layer utilities {
-  .hid {
-    display: none;
+  .open-status {
+    @apply item-status bg-blue-400;
+  }
+
+  .close-status {
+    @apply item-status bg-green-800;
   }
 }

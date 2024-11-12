@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import TodoForm from "./components/TodoForm";
 import TodoList from "./components/TodoList";
 
@@ -21,6 +21,22 @@ Order by ASC or DESC
 function App() {
   const [todos, setTodos] = useState([]);
 
+  useEffect(() => {
+    //init data todo if data availabled in storage
+    const todosFromLocal = localStorage.getItem("todos");
+    if (todosFromLocal) {
+      setTodos(JSON.parse(todosFromLocal));
+    }
+  }, []);
+
+  useEffect(() => {
+    // save data todos in storage
+
+    if (todos.length) {
+      localStorage.setItem("todos", JSON.stringify(todos));
+    }
+  }, [todos]);
+
   const addItemTodo = (description, severity) => {
     const Item = {
       id: Date.now(),
@@ -34,20 +50,23 @@ function App() {
     });
   };
 
-  const closeItem = (closeId) => {
-    console.log(closeId);
-    const newTodos = [...todos];
-    newTodos.map((todo) =>
-      todo.id === closeId ? { ...todo, isClose: !!todo.isClose } : todo
-    );
-    console.log("new after run", newTodos);
-    setTodos(newTodos);
+  const clearCurrentText = () => {};
 
-    // way2
-    // setTodos((prevState) =>
-    //   prevState.map((todo) =>
-    //     todo.id === closeId ? { ...todo, isClose: true } : todo
-    //   ));
+  const closeItem = (closeId) => {
+    // Way 1 No Work
+    // const newTodos = [...todos];
+    // newTodos.map((todo) =>
+    //   todo.id === closeId ? { ...todo, isClose: !todo.isClose } : todo
+    // );
+
+    // setTodos(newTodos);
+
+    // Way 2 Works
+    setTodos((prevState) =>
+      prevState.map((todo) =>
+        todo.id === closeId ? { ...todo, isClose: !todo.isClose } : todo
+      )
+    );
 
     // way3
     // setTodos((prevState) => {
@@ -69,7 +88,10 @@ function App() {
     <>
       <h1 className="text-5xl font-bold text-center">Todo Tracker</h1>
       <div className="mx-auto p-6 max-w-[900px]">
-        <TodoForm addItemTodo={addItemTodo} />
+        <TodoForm
+          addItemTodo={addItemTodo}
+          clearCurrentText={clearCurrentText}
+        />
         <TodoList todos={todos} closeItem={closeItem} deleteTodo={deleteTodo} />
       </div>
     </>

@@ -3,11 +3,16 @@ import React, { useEffect } from "react";
 const TodoForm = ({ addItemTodo }) => {
   const [description, setDescription] = React.useState("");
   const [severity, setSeverity] = React.useState("");
+
   console.log("run into TodoForm component");
 
   useEffect(() => {
     console.log("render TodoForm component"); /** only run once */
-  }, []);
+
+    return () => {
+      console.log("clean up run in TodoForm ");
+    };
+  }, [description, severity]);
 
   return (
     <div>
@@ -36,7 +41,10 @@ const TodoForm = ({ addItemTodo }) => {
       <p>
         <button
           className="text-right inline-flex p-2 btn btn-add mt-5 ml-auto flex-end items-end"
-          onClick={(e) => addItemTodo(description, severity)}
+          onClick={(e) => {
+            addItemTodo(description, severity);
+            setDescription("");
+          }}
         >
           Add Item
         </button>

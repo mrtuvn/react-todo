@@ -1,17 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import TodoFilter from "./TodoList/TodoFilter";
 import TodoItem from "./TodoList/TodoItem";
+import TodoSearch from "./TodoList/TodoSearch";
 
 const TodoList = ({ todos, deleteTodo, closeItem }) => {
-  console.log("render todoList component");
-  console.log("todoList ", todos);
-
   return (
     <div className="py-4 ">
-      List Todo
-      <TodoFilter />
+      <div className="border-t-orange-50 py-5 inline-flex w-full flex-wrap items-center justify-between gap-20">
+        <p>List Todo</p>
+
+        <TodoSearch todos={todos} />
+      </div>
+
+      <TodoFilter todos={todos} />
+
       <div className="itemsWrap flex flex-col gap-2 flex-wrap">
-        {todos &&
+        {todos?.length > 0 ? (
           todos.map((todo) => {
             return (
               <TodoItem
@@ -21,7 +25,10 @@ const TodoList = ({ todos, deleteTodo, closeItem }) => {
                 deleteTodo={deleteTodo}
               />
             );
-          })}
+          })
+        ) : (
+          <p>Not found! Try with another keyword.</p>
+        )}
       </div>
     </div>
   );

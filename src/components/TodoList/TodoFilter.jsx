@@ -1,14 +1,23 @@
 import React from "react";
 
-const TodoFilter = () => {
+const TodoFilter = ({ todos }) => {
   return (
-    <div>
-      <p>
-        Filter: <span>All</span> <span>Open</span> <span>Close</span>
+    <div className="my-2">
+      <p className="mb-5 inline-flex flex-wrap gap-2 items-center">
+        Filter:{" "}
+        <button className="item-status" onClick={() => {}}>
+          All
+        </button>{" "}
+        <button className="open-status" onClick={() => {}}>
+          Open
+        </button>{" "}
+        <button className="close-status" onClick={() => {}}>
+          Closed
+        </button>
       </p>
-      <p>
+      <p className="my-2">
         Order By:{" "}
-        <select name="sortBy">
+        <select className="p-2 ms-2" name="sortBy">
           <option value="asc">ASC</option>
           <option value="desc">DESC</option>
         </select>
