@@ -19,9 +19,10 @@ const TodoItem = ({ todo, deleteTodo, closeItem }) => {
           <p className="text-description mb-3 max-w-prose ">
             {todo && todo.description}
           </p>
-          <p className="prority item-status max-w-fit p-1">
+          Severity:{"  "}
+          <span className="prority item-status max-w-fit p-1">
             {todo && todo.severity}
-          </p>
+          </span>
         </div>
         <div className="actions ml-auto mt-4">
           <button
