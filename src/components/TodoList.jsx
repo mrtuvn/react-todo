@@ -7,24 +7,56 @@ const TodoList = ({ todos, deleteTodo, closeItem }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredTodos, setFilteredTodos] = useState([]);
 
+  const filterTodos = () => {
+    setFilteredTodos(
+      todos.filter((todo) =>
+        todo.description.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+    );
+  };
+
+  const filterTodosByAll = (e) => {
+    filterTodos();
+  };
+
+  const filterTodosByOpen = (e) => {
+    setFilteredTodos(todos.filter((todo) => todo.isClose === false));
+  };
+
+  const filterTodosByClose = (e) => {
+    setFilteredTodos(todos.filter((todo) => todo.isClose === true));
+  };
+
+  const filterTodosByOrder = (order) => {
+    let arraySorted = [...todos];
+    arraySorted.sort((a, b) => {
+      if (order === "asc") {
+        return a.description.localeCompare(b.description);
+      } else if (order === "desc") {
+        return b.description.localeCompare(a.description);
+      } else {
+        throw new Error('Invalid order. Please specify "asc" or "desc".');
+      }
+    });
+
+    setFilteredTodos(arraySorted);
+  };
+
   const searchTodos = () => {
+    if (searchQuery) {
+      const timer = setTimeout(() => {
+        filterTodos();
+      }, 1200);
+      clearTimeout(timer);
+    }
+
     if (todos.length > 0) {
-      setFilteredTodos(
-        todos.filter((todo) =>
-          todo.description.toLowerCase().includes(searchQuery.toLowerCase())
-        )
-      );
+      filterTodos();
     }
   };
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      results = searchTodos();
-    }, 1000);
-
-    return () => {
-      clearTimeout(timer);
-    };
+    searchTodos(); // run once to initialize data
   }, [searchQuery, todos]);
 
   return (
@@ -32,10 +64,19 @@ const TodoList = ({ todos, deleteTodo, closeItem }) => {
       <div className="border-t-orange-50 py-5 inline-flex w-full flex-wrap items-center justify-between gap-20">
         <p>List Todo</p>
 
-        <TodoSearch searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+        <TodoSearch
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+          searchTodos={searchTodos}
+        />
       </div>
 
-      <TodoFilter todos={todos} />
+      <TodoFilter
+        filterTodosByAll={filterTodosByAll}
+        filterTodosByOpen={filterTodosByOpen}
+        filterTodosByClose={filterTodosByClose}
+        filterTodosByOrder={filterTodosByOrder}
+      />
 
       <div className="itemsWrap flex flex-col gap-2 flex-wrap">
         <p>

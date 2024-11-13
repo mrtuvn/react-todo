@@ -4,16 +4,6 @@ const TodoForm = ({ addItemTodo }) => {
   const [description, setDescription] = React.useState("");
   const [severity, setSeverity] = React.useState("");
 
-  console.log("run into TodoForm component");
-
-  useEffect(() => {
-    console.log("render TodoForm component"); /** only run once */
-
-    return () => {
-      console.log("clean up run in TodoForm ");
-    };
-  }, [description, severity]);
-
   return (
     <div>
       <label htmlFor="descriptionField">Description</label>
