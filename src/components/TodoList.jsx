@@ -61,7 +61,7 @@ const TodoList = ({ todos, deleteTodo, closeItem }) => {
 
   return (
     <div className="py-4 ">
-      <div className="border-t-orange-50 py-5 inline-flex w-full flex-wrap items-center justify-between gap-20">
+      <div className="border-t-gray-200 border-t-2 mt-5 py-5 inline-flex w-full flex-wrap items-center justify-between gap-20">
         <p>List Todo</p>
 
         <TodoSearch
@@ -78,7 +78,7 @@ const TodoList = ({ todos, deleteTodo, closeItem }) => {
         filterTodosByOrder={filterTodosByOrder}
       />
 
-      <div className="itemsWrap flex flex-col gap-2 flex-wrap">
+      <div className="itemsWrap flex flex-col gap-3 flex-wrap">
         <p>
           {filteredTodos.length > 1 ? "Totals" : "Total"}:{" "}
           {filteredTodos.length}

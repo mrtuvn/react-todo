@@ -3,7 +3,7 @@ import clsx from "clsx";
 const TodoItem = ({ todo, deleteTodo, closeItem }) => {
   return (
     <div className="flex flex-col border rounded-md">
-      <div className="itemHead p-4">
+      <div className="itemHead p-4 bg-gray-200">
         <span className="itemId">{todo && todo.id}</span>
         <span
           className={clsx("itemStatus bg-[#ccc] item-status ms-2", {
@@ -14,7 +14,7 @@ const TodoItem = ({ todo, deleteTodo, closeItem }) => {
           {todo.isClose ? "closed" : "open"}
         </span>
       </div>
-      <div className="itemBody flex flex-col flex-wrap p-4 pt-0">
+      <div className="itemBody flex flex-col flex-wrap p-4">
         <div className="itemContent">
           <p className="text-description mb-3 max-w-prose ">
             {todo && todo.description}

@@ -7,7 +7,7 @@ const TodoFilter = ({
   filterTodosByOrder,
 }) => {
   return (
-    <div className="my-2">
+    <div className="my-2 border-none">
       <p className="mb-5 inline-flex flex-wrap gap-2 items-center">
         Filter:
         <button className="item-status" onClick={() => filterTodosByAll()}>
